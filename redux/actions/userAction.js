@@ -50,3 +50,15 @@ export const setErcUserCliam = (payload) => {
     payload,
   };
 };
+export const setNetwork = (payload) => {
+  return {
+    type: "setNetwork",
+    payload,
+  };
+};
+export const setIsWhiteListUser = (payload) => {
+  return {
+    type: "setIsWhiteListUser",
+    payload,
+  };
+};

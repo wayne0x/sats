@@ -327,6 +327,24 @@ body {
       background: #007c00;
     }
   }
+  &.disconnect {
+    .iconfont.icon-duankai {
+      display: none;
+    }
+    &:hover {
+      background-color: red;
+      .iconfont {
+        display: none;
+      }
+      .iconfont.icon-duankai {
+        display: inline-block;
+      }
+      &::before,
+      &::after {
+        background: #be4b4a;
+      }
+    }
+  }
   &.small {
     transform: scale(0.8);
     border: 1px solid #ccc;

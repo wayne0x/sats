@@ -14,6 +14,13 @@ export default function reducer(
     ercUserInfo: null,
     brcUserCliam: false,
     ercUserCliam: false,
+    network: 0,
+    /**
+     * bsc test 97
+     * bsc 56
+     */
+    networkPrd: 97,
+    isWhiteListUser: false,
   },
   action
 ) {
@@ -57,6 +64,16 @@ export default function reducer(
       return {
         ...state,
         ercUserCliam: action.payload,
+      };
+    case "setNetwork":
+      return {
+        ...state,
+        network: action.payload,
+      };
+    case "setIsWhiteListUser":
+      return {
+        ...state,
+        isWhiteListUser: action.payload,
       };
     default:
       return state;

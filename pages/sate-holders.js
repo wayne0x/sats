@@ -18,18 +18,13 @@ import {
   changeMessage,
   setBrcUserCliam,
   setErcUserCliam,
+  setNetwork,
 } from "../redux/actions/index";
 import { useWeb3React } from "@web3-react/core";
 
 export default function Holders() {
   let cfg = {
-    // provider: "https://data-seed-prebsc-1-s1.binance.org:8545",
-    // chainId: 97,
-    // address: "0x4169c6d6413bE6b56Ae37cb2E58DDa4Cf67B9d80",、
-    // privateKey:
-    //   "0bf08069af1ebae08168fd6d58dfbc4844ed195e65d9eb36ab18469b49e416ab",
     AIRDROP_ADDR: "0xdC624ad749298c811D71DB1Ff51f2CdA84b1f874",
-    // TOKEN_ADDR: "0xbd7836f30BaD4d5398c285046DD9Fdeab04F9A91",
   };
   // init web3
   const { active, account, library, connector, activate, deactivate } =
@@ -45,9 +40,9 @@ export default function Holders() {
   holders.data.detail.forEach((holder) => {
     addresss.push(holder.address);
   });
-  addresss.push(
-    "bc1pp436snntu77e09wvdnwqs2jed44k4rq67u4l3wwrt7e6c7uq7pxqg2evxh"
-  );
+  // addresss.push(
+  //   "bc1pp436snntu77e09wvdnwqs2jed44k4rq67u4l3wwrt7e6c7uq7pxqg2evxh"
+  // );
   addresss = addresss.filter((item, index, array) => {
     return array.indexOf(item) === index;
   });
@@ -62,7 +57,7 @@ export default function Holders() {
   const Tx = require("ethereumjs-tx").Transaction;
   const Common = require("ethereumjs-common").default;
   const merkletree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
-  // const rootHash = merkletree.getRoot().toString("hex");
+  const rootHash = merkletree.getRoot().toString("hex");
   // console.log("rootHash is: ", rootHash);
 
   // changeRedux
@@ -87,10 +82,18 @@ export default function Holders() {
   // };
 
   useEffect(() => {
-    // for (let i = 0; i < 40; i++) {
-    //   getList(i);
-    // }
-    getUserRecords();
+    // // for (let i = 0; i < 40; i++) {
+    // //   getList(i);
+    // // }
+    if (window && window.ethereum) {
+      dispatch(setNetwork(window.ethereum.networkVersion));
+    }
+    // console.log(store.getState().user.network);
+    // console.log(store.getState().user.networkPrd);
+    // console.log("brcUserInfo:", store.getState().user.brcUserInfo);
+    if (store.getState().user.network == store.getState().user.networkPrd) {
+      getUserRecords();
+    }
   }, []);
 
   async function getUserRecords() {
@@ -102,6 +105,66 @@ export default function Holders() {
       });
   }
 
+  let [isWhiteListUser, setIsWhiteListUser] = useState(false);
+  function getIsWhiteListUser() {
+    console.log("brcUserInfo:", store.getState().user.brcUserInfo);
+    const claimingAddr2 = keccak256(store.getState().user.brcUserInfo);
+    const hexProof = merkletree.getHexProof(claimingAddr2);
+    airdropContract.methods
+      .validateBrcAddress(web3.utils.toHex(claimingAddr2), hexProof)
+      .call()
+      .then((v) => {
+        console.log(v);
+        setIsWhiteListUser(v);
+      });
+  }
+
+  // getNetWorkId
+  const getNetWork = (e, type) => {
+    if (!store.getState().user.brcUserInfo) {
+      dispatch(
+        changeMessage({
+          type: "warning",
+          msg: "Please link BRC wallet first",
+        })
+      );
+      return;
+    }
+    if (window.ethereum) {
+      web3.eth.net.getId().then((res) => {
+        if (res == store.getState().user.networkPrd) {
+          connect(e, type);
+          setNetwork;
+          dispatch(setNetwork(res));
+        } else {
+          changeNetwork(store.getState().user.networkPrd, e, type);
+        }
+      });
+    } else {
+      dispatch(
+        changeMessage({
+          type: "warning",
+          msg: "Your browser does not support connected wallets",
+        })
+      );
+    }
+  };
+  // changeNetwork
+  const changeNetwork = (networkId, e, type) => {
+    window.ethereum
+      .request({
+        method: "wallet_switchEthereumChain",
+        params: [
+          {
+            chainId: Web3.utils.numberToHex(networkId), //链id
+          },
+        ],
+      })
+      .then((res) => {
+        getNetWork(e, type);
+      })
+      .catch((error) => {});
+  };
   // connect Meta Mask
   async function connect(e, type) {
     // Please link Erc wallet first
@@ -122,6 +185,7 @@ export default function Holders() {
           method: "eth_requestAccounts",
         });
         dispatch(setErcUserInfo(accounts[0]));
+        localStorage.setItem("ercDisconnect", false);
       } else {
         await activate(walletConnect);
       }
@@ -131,8 +195,6 @@ export default function Holders() {
   }
 
   async function cliam(address) {
-    // console.log("BRC Address:", store.getState().user.brcUserInfo);
-    // console.log("ERC Address:", store.getState().user.ercUserInfo);
     const claimingAddr2 = keccak256(store.getState().user.brcUserInfo);
     const hexProof = merkletree.getHexProof(claimingAddr2);
     let isWhiteListUser = await airdropContract.methods
@@ -203,7 +265,9 @@ export default function Holders() {
     <Layout>
       <div className={styles.index}>
         <div className={`box`}>
-          <div className={`content`}>说明：基于块高[{blockHeight}]快照</div>
+          <div className={`content`}>
+            Hint: based on snapshot data of block height [{blockHeight}].
+          </div>
         </div>
 
         {/* my address */}
@@ -226,49 +290,43 @@ export default function Holders() {
                     stateData.user.brcUserInfo.length - 10,
                     stateData.user.brcUserInfo.length
                   )}`}</li>
-                  <li>1200,000,000,000 Sats</li>
                   <li>
-                    {stateData.user.ercUserInfo ? (
-                      // {userRecords.findIndex((user) => user.brc == item) !=
-                      //   -1 ? (
-                      //     <p className="state success">
-                      //       {/* <i className="iconfont icon-24gl-receipt"></i>verify */}
-                      //       <button className="btn small green">
-                      //         <i className="iconfont icon-24gl-receipt"></i>verify
-                      //       </button>
-                      //     </p>
-                      //   ) : (
-                      //     <p className="state">
-                      //       <i className="iconfont icon-daiqueren"></i>
-                      //     </p>
-                      //   )}
-                      // btn small green
-                      <button
-                        className={`btn ${
-                          userRecords.findIndex(
+                    {!stateData.user.isWhiteListUser
+                      ? "You're not on the white list"
+                      : "1200,000,000,000 Sats"}
+                  </li>
+                  {!stateData.user.isWhiteListUser ? <li>You not win</li> : ""}
+                  {stateData.user.isWhiteListUser ? (
+                    <li>
+                      {stateData.user.ercUserInfo ? (
+                        <button
+                          className={`btn ${
+                            userRecords.findIndex(
+                              (user) => user.brc == stateData.user.brcUserInfo
+                            ) != -1
+                              ? "green"
+                              : ""
+                          }`}
+                          onClick={(e) => cliam(stateData.user.ercUserInfo)}
+                        >
+                          {userRecords.findIndex(
                             (user) => user.brc == stateData.user.brcUserInfo
                           ) != -1
-                            ? "green"
-                            : ""
-                        }`}
-                        onClick={(e) => cliam(stateData.user.ercUserInfo)}
-                      >
-                        {userRecords.findIndex(
-                          (user) => user.brc == stateData.user.brcUserInfo
-                        ) != -1
-                          ? "verify"
-                          : "Claim"}
-                      </button>
-                    ) : (
-                      // onClick={walletListShow}
-                      <button
-                        className="btn"
-                        onClick={(e) => connect(e, "MetaMask")}
-                      >
-                        ERC Connect
-                      </button>
-                    )}
-                  </li>
+                            ? "verify"
+                            : "Claim"}
+                        </button>
+                      ) : (
+                        <button
+                          className="btn"
+                          onClick={(e) => getNetWork(e, "MetaMask")}
+                        >
+                          ERC Connect
+                        </button>
+                      )}
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </div>
             </div>

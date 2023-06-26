@@ -7,4 +7,6 @@ export {
   setErcUserInfo,
   setBrcUserCliam,
   setErcUserCliam,
+  setNetwork,
+  setIsWhiteListUser,
 } from "./userAction";

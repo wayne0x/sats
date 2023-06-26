@@ -15,9 +15,7 @@ import {
 } from "../redux/actions/index";
 
 export default function Home() {
-  //状态机内部的数据;
   const stateData = useSelector((state) => {
-    // console.log("状态机数据", state);
     return state;
   });
   // changeRedux
@@ -31,7 +29,7 @@ export default function Home() {
     <Layout>
       <div className={styles.index}>
         <div className={`box`}>
-          <div className={`title`}>The Birth of God.</div>
+          <div className={`title`}>The Birth of God</div>
           <div className={`content ${styles.belief_box}`}>
             <h2>100000000 Satoshis = 1 BTC</h2>
             <h3>10000000 Satoshis = 0.1 BTC</h3>
@@ -137,39 +135,17 @@ export default function Home() {
         </div>
 
         <div className={`box`}>
-          <div className={`title`}>How to get</div>
+          <div className={`title`}>how to claim</div>
           <div className={`content ${styles.echarts_content}`}>
             <div className={`float_left ${styles.float_left}`}>
-              <p>To buy SG Token, follow these simple steps:</p>
-              <br />
               <p>
-                Step 1: Download and set up a compatible wallet, such as
-                MetaMask or Trust Wallet.
+                Step 1: Switch to the "sate-holders" page and connect your BRC20
+                wallet.
               </p>
+              <p>Step 2: Connect other wallets.</p>
               <p>
-                Step 2: Purchase BNB (BNB) on a cryptocurrency exchange and
-                transfer it to your wallet.
+                Step 3: Click "Claim" and view your SG balance in the wallet.
               </p>
-              <p>
-                Step 3: Visit a decentralized exchange like Pankcake and connect
-                your wallet.
-              </p>
-              <p>
-                Step 4: Select SatsGod Token (SG) as the desired token and enter
-                the amount you'd like to buy. The official token address to
-                import is 0xXXXXD3
-              </p>
-              <p>
-                Step 5: Review the transaction details, confirm the swap, and
-                enjoy your SG Token!
-              </p>
-              <br />
-              <p>
-                *Please note that trading fees and slippage may apply during the
-                purchase process.
-              </p>
-              <br />
-              <p>Let us hold SG to pay tribute to our faith!</p>
             </div>
             <div className={`float_right ${styles.float_right}`}>
               <img src="/images/logo-single.png" />
@@ -178,9 +154,14 @@ export default function Home() {
         </div>
 
         <div className={`box`}>
-          <div className={`title`}>Road Map</div>
-          <div className={`content ${styles.road_map}`}>
-            <ul>
+          {/* <div className={`title`}>
+            Salute to everyone in the world of BTC. Let holding SG witness
+            together.
+          </div> */}
+          <div className={`content`}>
+            Salute to everyone in the world of BTC. Let holding SG witness
+            together.
+            {/* <ul>
               <li>Step1</li>
               <li>1.制作网站</li>
               <li>2.发布合约</li>
@@ -201,7 +182,7 @@ export default function Home() {
             <ul>
               <li>终极想法：</li>
               <li>尽我所能把BRC生态与EVM生态连接起来</li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <div className={styles.footer}>
