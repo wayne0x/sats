@@ -149,15 +149,13 @@ function header(props) {
   // console.log("rootHash is: ", rootHash);
   // let [isWhiteListUser, setIsWhiteListUser] = useState(false);
   function getIsWhiteListUser(address) {
-    console.log(address);
+    dispatch(setIsWhiteListUser(false));
     const claimingAddr2 = keccak256(address);
     const hexProof = merkletree.getHexProof(claimingAddr2);
     airdropContract.methods
       .validateBrcAddress(web3.utils.toHex(claimingAddr2), hexProof)
       .call()
       .then((v) => {
-        console.log("brcUserInfo:", address);
-        console.log(v);
         // setIsWhiteListUser(v);
         dispatch(setIsWhiteListUser(v));
       });
@@ -168,7 +166,7 @@ function header(props) {
     dispatch(
       changeLoading({
         state: true,
-        msg: "Lading...",
+        msg: "Loading...",
       })
     );
   };

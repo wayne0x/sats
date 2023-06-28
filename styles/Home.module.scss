@@ -12,34 +12,115 @@
 }
 .beginning {
   .float_left {
-    width: 505px;
+    width: 705px;
     img {
       width: 100%;
     }
   }
   .float_right {
-    width: calc(100% - 525px);
+    width: calc(100% - 725px);
     line-height: 24px;
     .prospect {
-      padding-top: 24px;
+      padding-top: 30px;
+      font-weight: bold;
+      text-align: center;
     }
   }
 }
 
-.echarts_content {
-  .float_left {
-    width: calc(100% - 320px);
-  }
-  .float_right {
-    width: 300px;
-    height: 300px;
-    // background-color: #ccc;
-    text-align: center;
-    img {
-      height: 100%;
-      width: auto;
-      margin: 0 auto;
+.who_tokenomics_box {
+  overflow: hidden;
+  position: relative;
+
+  .who_box {
+    width: 505px;
+    // padding: 0 !important;
+    height: 745px;
+    .who_img {
+      height: calc(100% - 54px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+  }
+
+  .tokenomics_content {
+    width: calc(100% - 525px);
+    .tokenomics_box {
+      height: 457px;
+
+      .echarts_content {
+        overflow: hidden;
+        .table_top {
+          margin: 10px 0;
+        }
+        .echarts_box {
+          position: relative;
+          overflow: hidden;
+          .float_left {
+            width: calc(100% - 160px);
+            ul {
+              border: 1px solid #ccc;
+              border-bottom: none;
+              margin: 0;
+              padding: 0;
+              .table_header {
+                font-weight: bold;
+              }
+              li {
+                border-bottom: 1px solid #ccc;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                span {
+                  display: inline-block;
+                  width: calc(33.333333% - 1px);
+                  font-size: 12px;
+                  height: 100%;
+                  vertical-align: top;
+                  padding: 5px 10px;
+                  &:nth-last-of-type(1) {
+                    border: none;
+                  }
+                }
+              }
+            }
+          }
+          .float_right {
+            height: 100%;
+            width: 150px;
+            margin-top: 30px;
+            text-align: center;
+            img {
+              height: 150px;
+              width: auto;
+              margin: 0 auto;
+            }
+          }
+        }
+      }
+    }
+    .address_box {
+      height: 268px;
+      .contract_content {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        ul {
+          margin: 0;
+          padding: 5px 15px;
+          list-style: disc;
+          li {
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.step_content {
+  .float_left {
+    margin-right: 20px;
   }
 }
 .road_map {
@@ -53,7 +134,9 @@
     }
   }
 }
-
+.salute_content {
+  text-align: center;
+}
 .footer {
   text-align: center;
   line-height: 60px;

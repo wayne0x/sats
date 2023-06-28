@@ -29,26 +29,22 @@ export default function Home() {
     <Layout>
       <div className={styles.index}>
         <div className={`box`}>
-          <div className={`title`}>The Birth of God</div>
+          <div className={`title`}>
+            <img className={`img-icon`} src="/images/W95-14.png" />
+            The Birth of God
+          </div>
           <div className={`content ${styles.belief_box}`}>
             <h2>100000000 Satoshis = 1 BTC</h2>
             <h3>10000000 Satoshis = 0.1 BTC</h3>
             <h4>1000000 Satoshis = 0.01 BTC</h4>
             <h4>......</h4>
             <h5>10 Satoshis = 0.00000001 BTC</h5>
-            <p className={styles.belief}>
-              Each Bitcoin can be divided into 100 million Satoshis (Sats),
-              similar to how the US dollar can be divided into 100 cents.
-              Satoshis are the smallest unit of Bitcoin and are recorded on the
-              blockchain. Each Satoshi is approximately equal to 0.00000001
-              Bitcoin, which represents the eighth decimal place of Bitcoin. In
-              other words, a Satoshi is one millionth of a Bitcoin.
-            </p>
           </div>
         </div>
 
         <div className={`box`}>
           <div className={`title`}>
+            <img className={`img-icon`} src="/images/W95-145.png" />
             The First of 3 February 2009 Forum Posts Introducing Bitcoin
           </div>
           <div className={`content ${styles.beginning}`}>
@@ -56,133 +52,149 @@ export default function Home() {
               <img src="/images/brief-note.png" />
             </div>
             <div className={`float_right ${styles.float_right}`}>
-              <p>
-                In February 2009, Satoshi Nakamoto made three significant
-                introductions of the Bitcoin white paper and open-source
-                codebase to the members of the P2P Foundation forum. The first
-                occasion, which took place on February 11, 2009, marked the
-                public announcement of the Bitcoin project by its creator on the
-                P2P Foundation forum. Before these events in February, Nakamoto
-                utilized the email system associated with the cryptography
-                mailing list hosted on metzdowd.com.
-              </p>
+              <div className={`tips`}>
+                <p>
+                  In February 2009, Satoshi Nakamoto made three significant
+                  introductions of the Bitcoin white paper and open-source
+                  codebase to the members of the P2P Foundation forum.
+                </p>
+                <p>
+                  The first occasion, which took place on February 11, 2009,
+                  marked the public announcement of the Bitcoin project by its
+                  creator on the P2P Foundation forum.
+                </p>
+                <p>
+                  Before these events in February, Nakamoto utilized the email
+                  system associated with the cryptography mailing list hosted on
+                  metzdowd.com.
+                </p>
+              </div>
               <p className={styles.prospect}>
                 Child Boards:BITCOIN,Birth, New Era, Future of Finance.
               </p>
             </div>
           </div>
         </div>
-
-        <div className={`box`}>
-          <div className={`title`}>Who are we</div>
-          <div className={`content`}>
-            <p>
-              We are you and you are us! We are not limited by identity, we are
-              one! When BRC20 comes out, this commemorative will start!{" "}
-            </p>
-            <br />
-            <p>
-              There are so many Brc20's on Unisat, but we noticed two big and
-              small guys. He is Sats and God. Sats are the smallest unit of BTC,
-              and Sats have unique meaning and value. Believers of God believe
-              that BTC was created by God.
-            </p>
-            <br />
-            <p>
-              Since the circulation of Sats is very large, it is not known when
-              the end will come. But those who participated in him all firmly
-              believed in BTC, just like God's holders.
-            </p>
-            <br />
-            <p>
-              So based on this StatsGod was born. We hope that everyone can own
-              SG token, so we issue it on BNB with low gas fee, address: xxxxx
-            </p>
+        <div className={styles.who_tokenomics_box}>
+          <div className={`box ${styles.who_box} float_left`}>
+            <div className={`title`}>
+              <img className={`img-icon`} src="/images/W95-89.png" />
+              Who are we
+            </div>
+            <div className={`content ${styles.who_img}`}>
+              <img src="/images/sgpng.png" />
+            </div>
+          </div>
+          <div className={`${styles.tokenomics_content} float_right`}>
+            <div className={`box ${styles.tokenomics_box}`}>
+              <div className={`title`}>
+                <img className={`img-icon`} src="/images/W95-111.png" />
+                Tokenomics
+              </div>
+              <div className={`content ${styles.echarts_content}`}>
+                <div className={`tips`}>
+                  SG is merely a catalyst for this commemorative initiative,
+                  serving to honor the ideas generated by BRC20 and pay tribute
+                  to Satoshi Nakamoto. It does not constitute investment advice.
+                </div>
+                <p className={styles.table_top}>
+                  SG Token issued by SatsGod follows a unique tokenomics model
+                  to ensure a fair and successful
+                </p>
+                <div className={styles.echarts_box}>
+                  <div className={`float_left ${styles.float_left}`}>
+                    <p>
+                      Distribution:{" "}
+                      <strong className="float_right">No taxes</strong>
+                    </p>
+                    <ul>
+                      <li className={styles.table_header}>
+                        <span>Allocation</span>
+                        <span>Percentage</span>
+                        <span>Description</span>
+                      </li>
+                      <li>
+                        <span>2,100,000,000,000,000</span>
+                        <span>100%</span>
+                        <span>Total supply</span>
+                      </li>
+                      <li>
+                        <span>2,10,000,000,000,000</span>
+                        <span>10%</span>
+                        <span>
+                          Used to reward Sats
+                          <br />
+                          who support BRC20, God Lovers
+                        </span>
+                      </li>
+                      <li>
+                        <span>1890,000,000,000,000</span>
+                        <span>90%</span>
+                        <span>All into the pool</span>
+                      </li>
+                    </ul>
+                    <p></p>
+                  </div>
+                  <div className={`float_right ${styles.float_right}`}>
+                    <img src="/images/chart.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={`box ${styles.address_box}`}>
+              <div className={`title`}>
+                <img className={`img-icon`} src="/images/W95-141.png" />
+                Contract address
+              </div>
+              <div className={`content ${styles.contract_content}`}>
+                <ul>
+                  <li>Contract Address: 0x*****</li>
+                  <li>LP Address: 0x****</li>
+                  <li>Owner Address: 0x***</li>
+                </ul>
+                <ul>
+                  <li>0wner destruction transaction:0x........</li>
+                  <li>LP destruction transaction:0x........</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-
         <div className={`box`}>
           <div className={`title`}>
-            Tokenomics
-            <span>
-              SG is merely a catalyst for this commemorative initiative, serving
-              to honor the ideas generated by BRC20 and pay tribute to Satoshi
-              Nakamoto. It does not constitute investment advice.
-            </span>
+            <img className={`img-icon`} src="/images/W95-9.png" />
+            How to claim
           </div>
-          <div className={`content ${styles.echarts_content}`}>
+          <div className={`content ${styles.step_content}`}>
             <div className={`float_left ${styles.float_left}`}>
-              <p>
-                SG Token issued by SatsGod follows a unique tokenomics model to
-                ensure a fair and successful distribution:
-              </p>
-              <br />
-              <p>Total amount: 2,100,000,000,000,000</p>
-              <p>10% is used to reward Sats who support Brc20, God lovers</p>
-              <p>90% of all into the pool</p>
-              <p>No taxes</p>
-              <p>Contract reounced</p>
-              <br />
-              <p>
-                Contract Address: 0x***** LP Address: 0x**** Owner Address:
-                0x***
-              </p>
+              <img src="/images/logo-single.png" height={80} />
             </div>
-            <div className={`float_right ${styles.float_right}`}>
-              <img src="/images/chart.png" />
-            </div>
-          </div>
-        </div>
-
-        <div className={`box`}>
-          <div className={`title`}>how to claim</div>
-          <div className={`content ${styles.echarts_content}`}>
-            <div className={`float_left ${styles.float_left}`}>
+            <div className={`float_left ${styles.float_right}`}>
               <p>
-                Step 1: Switch to the "sate-holders" page and connect your BRC20
-                wallet.
+                <strong>Step 1:</strong> Switch to the "sate-holders" page and
+                connect your BRC20 wallet.
               </p>
-              <p>Step 2: Connect other wallets.</p>
               <p>
-                Step 3: Click "Claim" and view your SG balance in the wallet.
+                <strong>Step 2:</strong> Connect other wallets.
               </p>
-            </div>
-            <div className={`float_right ${styles.float_right}`}>
-              <img src="/images/logo-single.png" />
+              <p>
+                <strong>Step 3:</strong> Click "Claim" and view your SG balance
+                in the wallet.
+              </p>
             </div>
           </div>
         </div>
 
         <div className={`box`}>
           {/* <div className={`title`}>
+            <img className={`img-icon`} src="/images/W95-81.png" />
             Salute to everyone in the world of BTC. Let holding SG witness
             together.
           </div> */}
-          <div className={`content`}>
+          <div className={`content ${styles.salute_content}`}>
+            <img className={`img-icon`} src="/images/W95-81.png" />
             Salute to everyone in the world of BTC. Let holding SG witness
             together.
-            {/* <ul>
-              <li>Step1</li>
-              <li>1.制作网站</li>
-              <li>2.发布合约</li>
-              <li>3.上Dex</li>
-              <li>4.销毁相关地址</li>
-              <li>5.发布twitter</li>
-            </ul>
-            <ul>
-              <li>Step2</li>
-              <li>1.上CMC，Coingecko</li>
-              <li>2.保持twitter更新</li>
-            </ul>
-            <ul>
-              <li>Step3</li>
-              <li>1.开发BRC20 Swap</li>
-              <li>2.开发BRC 跨链</li>
-            </ul>
-            <ul>
-              <li>终极想法：</li>
-              <li>尽我所能把BRC生态与EVM生态连接起来</li>
-            </ul> */}
           </div>
         </div>
         <div className={styles.footer}>
