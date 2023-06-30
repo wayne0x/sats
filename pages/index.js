@@ -34,18 +34,82 @@ export default function Home() {
             The Birth of God
           </div>
           <div className={`content ${styles.belief_box}`}>
-            <h2>100000000 Satoshis = 1 BTC</h2>
-            <h3>10000000 Satoshis = 0.1 BTC</h3>
-            <h4>1000000 Satoshis = 0.01 BTC</h4>
+            {/* <h2>100000000 Satoshi = 1 BTC</h2>
+            <h3>10000000 Satoshi = 0.1 BTC</h3>
+            <h4>1000000 Satoshi = 0.01 BTC</h4>
             <h4>......</h4>
-            <h5>10 Satoshis = 0.00000001 BTC</h5>
+            <h5>10 Satoshi = 0.00000001 BTC</h5> */}
+            <div className={styles.h0}>
+              <p>Bitcoin Units of Measure</p>
+            </div>
+            <div className={`float_left ${styles.float_left}`}>
+              <img src="/images/img01.jpg" />
+            </div>
+            <div className={`float_right ${styles.float_right}`}>
+              {/* <div className={styles.h0}>
+                <p>Bitcoin Units of Measure</p>
+              </div> */}
+              <div className={styles.h9}>
+                <p>
+                  1 Satoshi = 0.00000001 <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h8}>
+                <p>
+                  10 Satoshi = 0.00000010 <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h7}>
+                <p>
+                  100 Satoshi = 0.00000100{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h6}>
+                <p>
+                  1000 Satoshi = 0.00001000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h5}>
+                <p>
+                  10000 Satoshi = 0.00010000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h4}>
+                <p>
+                  100000 Satoshi = 0.00100000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h3}>
+                <p>
+                  1000000 Satoshi = 0.01000000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h2}>
+                <p>
+                  10000000 Satoshi = 0.10000000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+              <div className={styles.h1}>
+                <p>
+                  100000000 Satoshi = 1.00000000{" "}
+                  <i className="iconfont icon-btc1"></i>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className={`box`}>
           <div className={`title`}>
             <img className={`img-icon`} src="/images/W95-145.png" />
-            The First of 3 February 2009 Forum Posts Introducing Bitcoin
+            The first post introducing Bitcoin was made on the forum on February
+            3, 2009.
           </div>
           <div className={`content ${styles.beginning}`}>
             <div className={`float_left ${styles.float_left}`}>
@@ -70,7 +134,7 @@ export default function Home() {
                 </p>
               </div>
               <p className={styles.prospect}>
-                Child Boards:BITCOIN,Birth, New Era, Future of Finance.
+                Child Boards: BITCOIN,Birth, New Era, Future of Finance.
               </p>
             </div>
           </div>
@@ -98,8 +162,8 @@ export default function Home() {
                   to Satoshi Nakamoto. It does not constitute investment advice.
                 </div>
                 <p className={styles.table_top}>
-                  SG Token issued by SatsGod follows a unique tokenomics model
-                  to ensure a fair and successful
+                  SG tokens issued by SatsGod followers are based on a unique
+                  tokenomics model which ensures fairness and success
                 </p>
                 <div className={styles.echarts_box}>
                   <div className={`float_left ${styles.float_left}`}>
@@ -121,11 +185,7 @@ export default function Home() {
                       <li>
                         <span>2,10,000,000,000,000</span>
                         <span>10%</span>
-                        <span>
-                          Used to reward Sats
-                          <br />
-                          who support BRC20, God Lovers
-                        </span>
+                        <span>Used to reward BRC20 God holders</span>
                       </li>
                       <li>
                         <span>1890,000,000,000,000</span>
@@ -153,8 +213,8 @@ export default function Home() {
                   <li>Owner Address: 0x***</li>
                 </ul>
                 <ul>
-                  <li>0wner destruction transaction:0x........</li>
-                  <li>LP destruction transaction:0x........</li>
+                  <li>Owner destruction transaction: 0x........</li>
+                  <li>LP destruction transaction: 0x........</li>
                 </ul>
               </div>
             </div>
@@ -193,13 +253,13 @@ export default function Home() {
           </div> */}
           <div className={`content ${styles.salute_content}`}>
             <img className={`img-icon`} src="/images/W95-81.png" />
-            Salute to everyone in the world of BTC. Let holding SG witness
-            together.
+            Hats off to everyone in the Bitcoin community. Let‘s hold SG and
+            witness together.
           </div>
         </div>
         <div className={styles.footer}>
           {/* <div className={`content ${styles.footer}`}> */}
-          <p>You are me and I am you and we will act on your orders</p>
+          <p>Everyone takes on a leadership role!</p>
           <p className={styles.version}>
             Powered by SatsGod v 0.1 | SG © 2013-2013, Simple
           </p>

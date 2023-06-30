@@ -1,6 +1,15 @@
+@font-face {
+  font-family: kufangEn;
+  src: url("/fonts/kufangEn.ttf");
+}
+
+@font-face {
+  font-family: baidu;
+  src: url("/fonts/baidu.ttf");
+}
+
 html,
 body {
-  // font-family: baidu !important;
   background: url("/images/body-bg.png") #fffff3;
 }
 

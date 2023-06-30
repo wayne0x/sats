@@ -361,7 +361,7 @@ function header(props) {
             ) : (
               // onClick={walletListShow}
               <button className="btn" onClick={brcConnect}>
-                BRC Connect
+                Connect BRC20
               </button>
             )}
             {/* {(stateData.user.brcUserInfo && isWhiteListUser) ||
@@ -388,7 +388,7 @@ function header(props) {
                 className="btn"
                 onClick={(e) => getNetWork(e, "MetaMask")}
               >
-                ERC Connect
+                Connect BSC
               </button>
             )}
             {/* </div> */}
@@ -448,8 +448,8 @@ function header(props) {
           </div>
         </div>
         <div className={`${styles.slogan} content`}>
-          Welcome! The existence of BTC will shatter the dimensional barrier.
-          Let us join this commemorative event!
+          Welcome! BTC will break through the dimensional barrier. Let's join
+          this commemorative event!
         </div>
         {/* <div className={`content ${styles.nav_box}`}>
           <ul>

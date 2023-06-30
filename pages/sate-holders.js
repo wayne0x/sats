@@ -320,7 +320,7 @@ export default function Holders() {
                           className="btn"
                           onClick={(e) => getNetWork(e, "MetaMask")}
                         >
-                          ERC Connect
+                          Connect BSC
                         </button>
                       )}
                     </li>

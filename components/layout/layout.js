@@ -29,7 +29,7 @@ export default function Layout({ children, home }) {
         <Head>
           <link
             rel="stylesheet"
-            href="https://at.alicdn.com/t/c/font_3624132_tk9ybxypn6f.css"
+            href="https://at.alicdn.com/t/c/font_3624132_cqhdlyl85th.css"
           />
         </Head>
         <Header></Header>

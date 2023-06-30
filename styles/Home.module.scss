@@ -3,8 +3,131 @@
 }
 
 .belief_box {
+  overflow: hidden;
   text-align: center;
+  .float_left {
+    padding: 30px 90px 0 50px;
+    text-align: center;
+    img {
+      width: 400px;
+    }
+  }
 
+  .float_right {
+    padding: 30px 100px 0 0;
+  }
+
+  // div {
+  // margin: 0;
+  // padding: 0;
+  // background: #fff;
+  // // text-align: right;
+  // p {
+  //   border: 1px solid #333;
+  //   border-bottom: none;
+  //   display: inline-block;
+  //   vertical-align: top;
+  //   padding: 0;
+  //   // margin: 0px auto;
+  //   padding: 5px 30px;
+  //   position: relative;
+  //   overflow: hidden;
+  //   border-radius: 2px 2px 0 0;
+  //   margin-bottom: -15px;
+  //   background: #fff;
+
+  //   &::before {
+  //     content: "";
+  //     position: absolute;
+  //     right: 0;
+  //     top: 1px;
+  //     width: 3px;
+  //     height: 100%;
+  //     background: #ccc;
+  //     transform: skew(0, 45deg);
+  //   }
+  //   &::after {
+  //     content: "";
+  //     position: absolute;
+  //     left: 1px;
+  //     top: 0;
+  //     width: 100%;
+  //     height: 3px;
+  //     background: #ccc;
+  //     transform: skew(45deg, 0);
+  //   }
+  // }
+  // }
+  div p i {
+    vertical-align: top;
+  }
+  .h0 p {
+    padding-top: 20px;
+  }
+  .h0 p,
+  .h0 p i {
+    // font-family: baidu !important;
+    border: none;
+    font-size: 32px;
+    padding-bottom: 5px;
+    margin-top: -10px;
+    margin-bottom: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  .h1 p {
+    // border: 1px solid #333;
+  }
+  .h1 p,
+  .h1 p i {
+    // border-radius: 5px;
+    font-size: 30px;
+    margin-bottom: 5px;
+    opacity: 1;
+  }
+  .h2 p,
+  .h2 p i {
+    font-size: 28px;
+    opacity: 0.95;
+  }
+  .h3 p,
+  .h3 p i {
+    font-size: 26px;
+    opacity: 0.9;
+  }
+  .h4 p,
+  .h4 p i {
+    font-size: 24px;
+    opacity: 0.85;
+  }
+  .h5 p,
+  .h5 p i {
+    font-size: 22px;
+    opacity: 0.8;
+  }
+  .h6 p,
+  .h6 p i {
+    font-size: 20px;
+    opacity: 0.75;
+  }
+  .h7 p,
+  .h7 p i {
+    font-size: 18px;
+    opacity: 0.7;
+  }
+  .h8 p,
+  .h8 p i {
+    font-size: 16px;
+    opacity: 0.65;
+  }
+  .h9 p,
+  .h9 p i {
+    font-size: 14px;
+    opacity: 0.6;
+  }
   .belief {
     text-align: left;
     padding-top: 10px;
@@ -35,7 +158,7 @@
   .who_box {
     width: 505px;
     // padding: 0 !important;
-    height: 745px;
+    height: 765px;
     .who_img {
       height: calc(100% - 54px);
       display: flex;
@@ -47,7 +170,7 @@
   .tokenomics_content {
     width: calc(100% - 525px);
     .tokenomics_box {
-      height: 457px;
+      height: 477px;
 
       .echarts_content {
         overflow: hidden;
