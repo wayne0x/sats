@@ -27,7 +27,7 @@ import holders from "../../api/holders.json";
 
 function header(props) {
   let cfg = {
-    AIRDROP_ADDR: "0xdC624ad749298c811D71DB1Ff51f2CdA84b1f874",
+    AIRDROP_ADDR: "0x41968844968593B080CE5573B7D8739Bb13d2dBf",
   };
   // init web3
   const { active, account, library, connector, activate, deactivate } =
@@ -361,7 +361,7 @@ function header(props) {
             ) : (
               // onClick={walletListShow}
               <button className="btn" onClick={brcConnect}>
-                Connect BRC20
+                Connect BRC
               </button>
             )}
             {/* {(stateData.user.brcUserInfo && isWhiteListUser) ||

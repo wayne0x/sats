@@ -24,7 +24,7 @@ import { useWeb3React } from "@web3-react/core";
 
 export default function Holders() {
   let cfg = {
-    AIRDROP_ADDR: "0xdC624ad749298c811D71DB1Ff51f2CdA84b1f874",
+    AIRDROP_ADDR: "0x41968844968593B080CE5573B7D8739Bb13d2dBf",
   };
   // init web3
   const { active, account, library, connector, activate, deactivate } =
@@ -40,9 +40,7 @@ export default function Holders() {
   holders.data.detail.forEach((holder) => {
     addresss.push(holder.address);
   });
-  // addresss.push(
-  //   "bc1pp436snntu77e09wvdnwqs2jed44k4rq67u4l3wwrt7e6c7uq7pxqg2evxh"
-  // );
+
   addresss = addresss.filter((item, index, array) => {
     return array.indexOf(item) === index;
   });
@@ -63,34 +61,43 @@ export default function Holders() {
   // changeRedux
   const dispatch = useDispatch();
 
-  // let addressList = [];
-  // const getList = (page) => {
-  //   axios
-  //     .get(
-  //       `https://unisat.io/brc20-api-v2/brc20/sats/holders?start=${page}&limit=500`,
-  //       {
-  //         headers: {
-  //           "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       addressList = addressList.concat(res.data.data.detail);
-  //       console.log(addressList);
-  //     })
-  //     .catch((error) => {});
-  // };
+  let addressList = [];
+  const getList = async (page) => {
+    for (let i = 0; i < 43; i++) {
+      // setTimeout(() => {
+      await axios
+        .get(
+          `https://unisat.io/brc20-api-v2/brc20/sats/holders?start=${
+            i * 500
+          }&limit=500`,
+          {
+            headers: {
+              "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+            },
+          }
+        )
+        .then((res) => {
+          addressList = addressList.concat(res.data.data.detail);
+          if (i == 42) {
+            console.log(addressList);
+          }
+        })
+        .catch((error) => {});
+      // }, i * 1000);
+    }
+  };
 
   useEffect(() => {
-    // // for (let i = 0; i < 40; i++) {
-    // //   getList(i);
-    // // }
+    // getList();
+
+    // for (let i = 0; i < 40; i++) {
+    //   setTimeout(() => {
+    //     getList(i * 500);
+    //   }, i * 1000);
+    // }
     if (window && window.ethereum) {
       dispatch(setNetwork(window.ethereum.networkVersion));
     }
-    // console.log(store.getState().user.network);
-    // console.log(store.getState().user.networkPrd);
-    // console.log("brcUserInfo:", store.getState().user.brcUserInfo);
     if (store.getState().user.network == store.getState().user.networkPrd) {
       getUserRecords();
     }

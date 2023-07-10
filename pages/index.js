@@ -34,21 +34,10 @@ export default function Home() {
             The Birth of God
           </div>
           <div className={`content ${styles.belief_box}`}>
-            {/* <h2>100000000 Satoshi = 1 BTC</h2>
-            <h3>10000000 Satoshi = 0.1 BTC</h3>
-            <h4>1000000 Satoshi = 0.01 BTC</h4>
-            <h4>......</h4>
-            <h5>10 Satoshi = 0.00000001 BTC</h5> */}
-            <div className={styles.h0}>
-              <p>Bitcoin Units of Measure</p>
-            </div>
             <div className={`float_left ${styles.float_left}`}>
               <img src="/images/img01.jpg" />
             </div>
             <div className={`float_right ${styles.float_right}`}>
-              {/* <div className={styles.h0}>
-                <p>Bitcoin Units of Measure</p>
-              </div> */}
               <div className={styles.h9}>
                 <p>
                   1 Satoshi = 0.00000001 <i className="iconfont icon-btc1"></i>
@@ -143,7 +132,7 @@ export default function Home() {
           <div className={`box ${styles.who_box} float_left`}>
             <div className={`title`}>
               <img className={`img-icon`} src="/images/W95-89.png" />
-              Who are we
+              Who Are We
             </div>
             <div className={`content ${styles.who_img}`}>
               <img src="/images/sgpng.png" />
@@ -204,7 +193,7 @@ export default function Home() {
             <div className={`box ${styles.address_box}`}>
               <div className={`title`}>
                 <img className={`img-icon`} src="/images/W95-141.png" />
-                Contract address
+                Contract Address
               </div>
               <div className={`content ${styles.contract_content}`}>
                 <ul>
@@ -223,7 +212,7 @@ export default function Home() {
         <div className={`box`}>
           <div className={`title`}>
             <img className={`img-icon`} src="/images/W95-9.png" />
-            How to claim
+            How To Claim
           </div>
           <div className={`content ${styles.step_content}`}>
             <div className={`float_left ${styles.float_left}`}>
@@ -246,11 +235,6 @@ export default function Home() {
         </div>
 
         <div className={`box`}>
-          {/* <div className={`title`}>
-            <img className={`img-icon`} src="/images/W95-81.png" />
-            Salute to everyone in the world of BTC. Let holding SG witness
-            together.
-          </div> */}
           <div className={`content ${styles.salute_content}`}>
             <img className={`img-icon`} src="/images/W95-81.png" />
             Hats off to everyone in the Bitcoin community. Let‘s hold SG and
