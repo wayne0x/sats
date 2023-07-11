@@ -14,7 +14,10 @@
   }
 
   .float_right {
-    padding: 30px 100px 0 0;
+    padding: 40px 90px 0 0;
+    p {
+      line-height: 180%;
+    }
   }
 
   // div {
@@ -77,9 +80,6 @@
     &::after {
       display: none;
     }
-  }
-  .h1 p {
-    // border: 1px solid #333;
   }
   .h1 p,
   .h1 p i {

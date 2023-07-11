@@ -62,3 +62,15 @@ export const setIsWhiteListUser = (payload) => {
     payload,
   };
 };
+export const setWhiteListLoading = (payload) => {
+  return {
+    type: "setWhiteListLoading",
+    payload,
+  };
+};
+export const setAddressStateLoading = (payload) => {
+  return {
+    type: "setAddressStateLoading",
+    payload,
+  };
+};

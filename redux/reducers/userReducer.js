@@ -21,6 +21,8 @@ export default function reducer(
      */
     networkPrd: 97,
     isWhiteListUser: false,
+    whiteListLoading: false,
+    addressStateLoading: false,
   },
   action
 ) {
@@ -74,6 +76,16 @@ export default function reducer(
       return {
         ...state,
         isWhiteListUser: action.payload,
+      };
+    case "setWhiteListLoading":
+      return {
+        ...state,
+        whiteListLoading: action.payload,
+      };
+    case "setAddressStateLoading":
+      return {
+        ...state,
+        addressStateLoading: action.payload,
       };
     default:
       return state;

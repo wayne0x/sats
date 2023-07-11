@@ -19,11 +19,14 @@ import {
   setErcUserCliam,
   setNetwork,
   setIsWhiteListUser,
+  setWhiteListLoading,
+  setAddressStateLoading,
 } from "../../redux/actions/index";
 import { Tooltip } from "@nextui-org/react";
 import Airdrop_ABI from "../../api/Airdrop.json";
 import Web3 from "web3";
-import holders from "../../api/holders.json";
+// import holders from "../../api/holders.json";
+import whiteList from "../../api/whiteList.json";
 
 function header(props) {
   let cfg = {
@@ -70,6 +73,16 @@ function header(props) {
       window.unisat.getAccounts().then((accounts) => {
         if (accounts[0]) {
           updatBrcUserInfo(accounts[0]);
+          // Get Erc20 Accounts
+          if (
+            window &&
+            window.ethereum &&
+            window.ethereum.selectedAddress &&
+            !store.getState().user.ercUserInfo &&
+            !JSON.parse(localStorage.getItem("ercDisconnect"))
+          ) {
+            updatErcUserInfo(window.ethereum.selectedAddress);
+          }
           localStorage.setItem("brcDisconnect", false);
           localStorage.setItem("ercDisconnect", false);
         }
@@ -91,16 +104,17 @@ function header(props) {
       //   console.log(network);
       // });
     }
-    // Get Erc20 Accounts
-    if (
-      window &&
-      window.ethereum &&
-      window.ethereum.selectedAddress &&
-      !store.getState().user.ercUserInfo &&
-      !JSON.parse(localStorage.getItem("ercDisconnect"))
-    ) {
-      updatErcUserInfo(window.ethereum.selectedAddress);
-    }
+
+    // // Get Erc20 Accounts
+    // if (
+    //   window &&
+    //   window.ethereum &&
+    //   window.ethereum.selectedAddress &&
+    //   !store.getState().user.ercUserInfo &&
+    //   !JSON.parse(localStorage.getItem("ercDisconnect"))
+    // ) {
+    //   updatErcUserInfo(window.ethereum.selectedAddress);
+    // }
     // changeAccount
     if (
       window &&
@@ -131,14 +145,15 @@ function header(props) {
   }, [Router.events]);
 
   // getIsWhiteListUser
-  let addresss = [];
-  holders.data.detail.forEach((holder) => {
-    addresss.push(holder.address);
-  });
-  addresss = addresss.filter((item, index, array) => {
-    return array.indexOf(item) === index;
-  });
-  let [whitelist, setwhitelist] = useState(addresss);
+  // let addresss = [];
+  // holders.data.detail.forEach((holder) => {
+  //   addresss.push(holder.address);
+  // });
+  // addresss = addresss.filter((item, index, array) => {
+  //   return array.indexOf(item) === index;
+  // });
+  // console.log(addresss);
+  let [whitelist, setwhitelist] = useState(whiteList);
   const keccak256 = require("keccak256");
   const leafNodes = whitelist.map((addr) => keccak256(addr));
   const { MerkleTree } = require("merkletreejs");
@@ -149,15 +164,20 @@ function header(props) {
   // console.log("rootHash is: ", rootHash);
   // let [isWhiteListUser, setIsWhiteListUser] = useState(false);
   function getIsWhiteListUser(address) {
-    dispatch(setIsWhiteListUser(false));
+    dispatch(setWhiteListLoading(true)), dispatch(setIsWhiteListUser(false));
     const claimingAddr2 = keccak256(address);
     const hexProof = merkletree.getHexProof(claimingAddr2);
     airdropContract.methods
       .validateBrcAddress(web3.utils.toHex(claimingAddr2), hexProof)
       .call()
       .then((v) => {
+        // console.log(address);
+        // console.log("------------------------------------------");
+        // console.log("getIsWhiteListUser:", v);
+        // console.log("------------------------------------------");
         // setIsWhiteListUser(v);
         dispatch(setIsWhiteListUser(v));
+        dispatch(setWhiteListLoading(false));
       });
   }
 
@@ -213,34 +233,34 @@ function header(props) {
       );
       return;
     }
-    localStorage.setItem("ercDisconnect", false);
-    if (
-      window &&
-      window.ethereum &&
-      window.ethereum.selectedAddress &&
-      !store.getState().user.ercUserInfo &&
-      !JSON.parse(localStorage.getItem("ercDisconnect"))
-    ) {
-      updatErcUserInfo(window.ethereum.selectedAddress);
+    // localStorage.setItem("ercDisconnect", false);
+    // if (
+    //   window &&
+    //   window.ethereum &&
+    //   window.ethereum.selectedAddress &&
+    //   !store.getState().user.ercUserInfo &&
+    //   !JSON.parse(localStorage.getItem("ercDisconnect"))
+    // ) {
+    //   updatErcUserInfo(window.ethereum.selectedAddress);
+    // } else {
+    if (window.ethereum) {
+      web3.eth.net.getId().then((res) => {
+        if (res == store.getState().user.networkPrd) {
+          connect(e, type);
+          dispatch(setNetwork(res));
+        } else {
+          changeNetwork(store.getState().user.networkPrd, e, type);
+        }
+      });
     } else {
-      if (window.ethereum) {
-        web3.eth.net.getId().then((res) => {
-          if (res == store.getState().user.networkPrd) {
-            connect(e, type);
-            dispatch(setNetwork(res));
-          } else {
-            changeNetwork(store.getState().user.networkPrd, e, type);
-          }
-        });
-      } else {
-        dispatch(
-          changeMessage({
-            type: "warning",
-            msg: "Your browser does not support connected wallets",
-          })
-        );
-      }
+      dispatch(
+        changeMessage({
+          type: "warning",
+          msg: "Your browser does not support connected wallets",
+        })
+      );
     }
+    // }
   };
   // changeNetwork
   const changeNetwork = (networkId, e, type) => {
@@ -272,6 +292,17 @@ function header(props) {
       return;
     }
     e.stopPropagation();
+    localStorage.setItem("ercDisconnect", false);
+    if (
+      window &&
+      window.ethereum &&
+      window.ethereum.selectedAddress &&
+      !store.getState().user.ercUserInfo &&
+      !JSON.parse(localStorage.getItem("ercDisconnect"))
+    ) {
+      updatErcUserInfo(window.ethereum.selectedAddress);
+      return;
+    }
     try {
       if (type == "MetaMask") {
         // await activate(injected);
@@ -310,22 +341,33 @@ function header(props) {
 
   async function updatBrcUserInfo(address) {
     if (store.getState().user.network == store.getState().user.networkPrd) {
+      // console.log("updatBrcUserInfo");
+      dispatch(setAddressStateLoading(true));
       getIsWhiteListUser(address);
       airdropContract.methods
         .hasBrcGet(address)
         .call()
         .then((v) => {
+          // console.log("hasBrcGet:", v);
+          dispatch(setAddressStateLoading(false));
           dispatch(setBrcUserCliam(v));
         });
     }
     dispatch(setBrcUserInfo(address));
+    Router.push("/sate-holders");
   }
   async function updatErcUserInfo(address) {
+    // console.log(store.getState().user.network);
+    // console.log(store.getState().user.networkPrd);
     if (store.getState().user.network == store.getState().user.networkPrd) {
+      // console.log("updatErcUserInfo");
+      dispatch(setAddressStateLoading(true));
       airdropContract.methods
         .hasErcGet(address)
         .call()
         .then((v) => {
+          // console.log("hasErcGet:", v);
+          dispatch(setAddressStateLoading(false));
           dispatch(setErcUserCliam(v));
         });
     }

@@ -10,7 +10,8 @@ import qs from "qs";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import Web3 from "web3";
 import Airdrop_ABI from "../api/Airdrop.json";
-import holders from "../api/holders.json";
+// import holders from "../api/holders.json";
+import whiteList from "../api/whiteList.json";
 import {
   changeUserAC,
   changeLoading,
@@ -19,6 +20,7 @@ import {
   setBrcUserCliam,
   setErcUserCliam,
   setNetwork,
+  setErcUserInfo,
 } from "../redux/actions/index";
 import { useWeb3React } from "@web3-react/core";
 
@@ -36,17 +38,17 @@ export default function Holders() {
     return state;
   });
 
-  let addresss = [];
-  holders.data.detail.forEach((holder) => {
-    addresss.push(holder.address);
-  });
+  // let addresss = [];
+  // holders.data.detail.forEach((holder) => {
+  //   addresss.push(holder.address);
+  // });
+  // addresss = addresss.filter((item, index, array) => {
+  //   return array.indexOf(item) === index;
+  // });
 
-  addresss = addresss.filter((item, index, array) => {
-    return array.indexOf(item) === index;
-  });
-
-  let [whitelist, setwhitelist] = useState(addresss);
-  let [blockHeight, setBlockHeight] = useState(holders.data.height);
+  let [whitelist, setwhitelist] = useState(whiteList);
+  // let [blockHeight, setBlockHeight] = useState(holders.data.height);
+  let [blockHeight, setBlockHeight] = useState(798070);
   let [userRecords, setUserRecords] = useState([]);
 
   const keccak256 = require("keccak256");
@@ -112,19 +114,19 @@ export default function Holders() {
       });
   }
 
-  let [isWhiteListUser, setIsWhiteListUser] = useState(false);
-  function getIsWhiteListUser() {
-    console.log("brcUserInfo:", store.getState().user.brcUserInfo);
-    const claimingAddr2 = keccak256(store.getState().user.brcUserInfo);
-    const hexProof = merkletree.getHexProof(claimingAddr2);
-    airdropContract.methods
-      .validateBrcAddress(web3.utils.toHex(claimingAddr2), hexProof)
-      .call()
-      .then((v) => {
-        console.log(v);
-        setIsWhiteListUser(v);
-      });
-  }
+  // let [isWhiteListUser, setIsWhiteListUser] = useState(false);
+  // function getIsWhiteListUser() {
+  //   console.log("brcUserInfo:", store.getState().user.brcUserInfo);
+  //   const claimingAddr2 = keccak256(store.getState().user.brcUserInfo);
+  //   const hexProof = merkletree.getHexProof(claimingAddr2);
+  //   airdropContract.methods
+  //     .validateBrcAddress(web3.utils.toHex(claimingAddr2), hexProof)
+  //     .call()
+  //     .then((v) => {
+  //       console.log(v);
+  //       setIsWhiteListUser(v);
+  //     });
+  // }
 
   // getNetWorkId
   const getNetWork = (e, type) => {
@@ -297,13 +299,33 @@ export default function Holders() {
                     stateData.user.brcUserInfo.length - 10,
                     stateData.user.brcUserInfo.length
                   )}`}</li>
-                  <li>
-                    {!stateData.user.isWhiteListUser
-                      ? "You're not on the white list"
-                      : "1200,000,000,000 Sats"}
-                  </li>
-                  {!stateData.user.isWhiteListUser ? <li>You not win</li> : ""}
-                  {stateData.user.isWhiteListUser ? (
+
+                  {!stateData.user.whiteListLoading ? (
+                    <li>
+                      {!stateData.user.isWhiteListUser
+                        ? "You're not on the white list"
+                        : "1200,000,000,000 Sats"}
+                    </li>
+                  ) : (
+                    <li>
+                      <img
+                        src="images/loading.gif"
+                        className="loading-line"
+                      ></img>
+                      Just a moment...
+                    </li>
+                  )}
+
+                  {!stateData.user.isWhiteListUser &&
+                  !stateData.user.whiteListLoading &&
+                  !stateData.user.addressStateLoading ? (
+                    <li>You not win</li>
+                  ) : (
+                    ""
+                  )}
+                  {stateData.user.isWhiteListUser &&
+                  !stateData.user.whiteListLoading &&
+                  !stateData.user.addressStateLoading ? (
                     <li>
                       {stateData.user.ercUserInfo ? (
                         <button
@@ -332,7 +354,13 @@ export default function Holders() {
                       )}
                     </li>
                   ) : (
-                    ""
+                    <li>
+                      <img
+                        src="images/loading.gif"
+                        className="loading-line"
+                      ></img>
+                      Just a moment...
+                    </li>
                   )}
                 </ul>
               </div>
@@ -348,14 +376,16 @@ export default function Holders() {
             <ul className={`tab_nav`}>
               <li>Address</li>
               <li>Value</li>
-              <li>{userRecords.length} / 20000</li>
+              <li>
+                {userRecords.length} / {whitelist.length}
+              </li>
             </ul>
           </div>
           <div className={`content ${styles.belief_box}`}>
             <div className={`tab_box`}>
               {whitelist.map((item, index) => {
                 return (
-                  <ul key={item}>
+                  <ul key={item + index}>
                     <li>{`${item.slice(0, 10)}....${item.slice(
                       item.length - 10,
                       item.length

@@ -1,12 +1,12 @@
-@font-face {
-  font-family: kufangEn;
-  src: url("/fonts/kufangEn.ttf");
-}
+// @font-face {
+//   font-family: kufangEn;
+//   src: url("/fonts/kufangEn.ttf");
+// }
 
-@font-face {
-  font-family: baidu;
-  src: url("/fonts/baidu.ttf");
-}
+// @font-face {
+//   font-family: baidu;
+//   src: url("/fonts/baidu.ttf");
+// }
 
 html,
 body {
@@ -206,6 +206,7 @@ body {
       // margin: -10px;
       margin: 0;
       padding: 0;
+      height: 28px;
       li {
         float: left;
         width: 33.3%;
@@ -278,6 +279,7 @@ body {
         overflow: hidden;
         margin: 0;
         padding: 0;
+        height: 40px;
         li {
           float: left;
           width: 33.3%;
@@ -286,6 +288,13 @@ body {
           padding: 0;
           border-right: 1px solid #fff;
           line-height: 40px;
+
+          .loading-line {
+            height: 40px;
+            vertical-align: middle;
+            margin-bottom: 5px;
+          }
+
           &:nth-last-of-type(1) {
             border: none;
           }
