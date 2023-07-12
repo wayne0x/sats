@@ -201,10 +201,11 @@ function header(props) {
     if (typeof window.unisat !== "undefined") {
       window.unisat.requestAccounts().then((accounts) => {
         if (accounts[0]) {
+          Router.push("/sate-holders");
+          // Router.push("sate-holders", undefined, { shallow: true });
           updatBrcUserInfo(accounts[0]);
           localStorage.setItem("brcDisconnect", false);
           localStorage.setItem("ercDisconnect", false);
-          Router.push("/sate-holders");
         }
       });
     } else {
@@ -354,7 +355,6 @@ function header(props) {
         });
     }
     dispatch(setBrcUserInfo(address));
-    Router.push("/sate-holders");
   }
   async function updatErcUserInfo(address) {
     // console.log(store.getState().user.network);
