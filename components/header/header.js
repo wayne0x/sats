@@ -330,14 +330,6 @@ function header(props) {
       dispatch(setErcUserInfo(null));
       localStorage.setItem("ercDisconnect", true);
     }
-    // try {
-    //   deactivate();
-    //   profileShow(false);
-    //   dispatch(setBrcUserInfo(null));
-    //   Router.push("/");
-    // } catch (ex) {
-    //   console.log(ex);
-    // }
   }
 
   async function updatBrcUserInfo(address) {
@@ -349,7 +341,7 @@ function header(props) {
         .hasBrcGet(address)
         .call()
         .then((v) => {
-          // console.log("hasBrcGet:", v);
+          console.log("hasBrcGet:", v);
           dispatch(setAddressStateLoading(false));
           dispatch(setBrcUserCliam(v));
         });
@@ -366,7 +358,7 @@ function header(props) {
         .hasErcGet(address)
         .call()
         .then((v) => {
-          // console.log("hasErcGet:", v);
+          console.log("hasErcGet:", v);
           dispatch(setAddressStateLoading(false));
           dispatch(setErcUserCliam(v));
         });

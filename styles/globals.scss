@@ -11,6 +11,8 @@
 html,
 body {
   background: url("/images/body-bg.png") #fffff3;
+  font-family: Arial, Helvetica, sans-serif !important;
+  line-height: 150%;
 }
 
 .overflow_hidden {
@@ -48,7 +50,7 @@ body {
   text-align: center;
   .content {
     display: inline-block;
-    font-family: kufangEn;
+    // font-family: kufangEn;
     max-width: 500px;
     padding: 10px 20px;
     margin: 20px auto;
@@ -136,7 +138,7 @@ body {
       // height: 20px;
       margin: 30px auto;
       color: #fff;
-      font-family: kufangEn;
+      // font-family: kufangEn;
 
       img {
         width: 200px;
@@ -209,7 +211,7 @@ body {
       height: 28px;
       li {
         float: left;
-        width: 33.3%;
+        width: calc(33.333333% - 1px);
         text-align: center;
         margin: 0;
         padding: 0;
@@ -276,13 +278,13 @@ body {
     .tab_box {
       margin: -10px;
       ul {
-        overflow: hidden;
+        // overflow: hidden;
         margin: 0;
         padding: 0;
-        height: 40px;
+        height: 45px;
         li {
           float: left;
-          width: 33.3%;
+          width: calc(33.333333% - 1px);
           text-align: center;
           margin: 0;
           padding: 0;
@@ -305,6 +307,31 @@ body {
             }
             &.success {
               color: #1dc81d;
+            }
+          }
+          .icon-tixingshixin {
+            // display: inline-block;
+            vertical-align: top;
+            color: #ff8000;
+            margin: 0 0 0 5px;
+            cursor: pointer;
+            position: relative;
+            // width: 10px;
+            // height: 10px;
+            label {
+              display: none;
+              position: absolute;
+              right: 0;
+              bottom: 30px;
+              width: 400px;
+              box-shadow: 0px 0 20px 0px rgba(0, 0, 0, 0.2);
+              text-align: left;
+              color: #000;
+            }
+            &:hover {
+              label {
+                display: inline-block;
+              }
             }
           }
         }

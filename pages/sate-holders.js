@@ -328,22 +328,37 @@ export default function Holders() {
                   !stateData.user.addressStateLoading ? (
                     <li>
                       {stateData.user.ercUserInfo ? (
-                        <button
-                          className={`btn ${
-                            userRecords.findIndex(
+                        !stateData.user.brcUserCliam ? (
+                          <span>
+                            Please choose another MetaMask address
+                            <i className="iconfont icon-tixingshixin">
+                              <label className="tips">
+                                Each Metamask address can only claim the airdrop
+                                once. Please click the 'Connect BSC' button in
+                                the top right corner to switch to an address
+                                that has not received the airdrop yet for
+                                claiming.
+                              </label>
+                            </i>
+                          </span>
+                        ) : (
+                          <button
+                            className={`btn ${
+                              userRecords.findIndex(
+                                (user) => user.brc == stateData.user.brcUserInfo
+                              ) != -1
+                                ? "green"
+                                : ""
+                            }`}
+                            onClick={(e) => cliam(stateData.user.ercUserInfo)}
+                          >
+                            {userRecords.findIndex(
                               (user) => user.brc == stateData.user.brcUserInfo
                             ) != -1
-                              ? "green"
-                              : ""
-                          }`}
-                          onClick={(e) => cliam(stateData.user.ercUserInfo)}
-                        >
-                          {userRecords.findIndex(
-                            (user) => user.brc == stateData.user.brcUserInfo
-                          ) != -1
-                            ? "verify"
-                            : "Claim"}
-                        </button>
+                              ? "verify"
+                              : "Claim"}
+                          </button>
+                        )
                       ) : (
                         <button
                           className="btn"

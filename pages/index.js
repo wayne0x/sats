@@ -40,54 +40,47 @@ export default function Home() {
             <div className={`float_right ${styles.float_right}`}>
               <div className={styles.h9}>
                 <p>
-                  1 Satoshi = 0.00000001 <i className="iconfont icon-btc1"></i>
+                  1 Satoshi = 0.00000001 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h8}>
                 <p>
-                  10 Satoshi = 0.00000010 <i className="iconfont icon-btc1"></i>
+                  10 Satoshi = 0.00000010 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h7}>
                 <p>
-                  100 Satoshi = 0.00000100{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  100 Satoshi = 0.00000100 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h6}>
                 <p>
-                  1000 Satoshi = 0.00001000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  1000 Satoshi = 0.00001000 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h5}>
                 <p>
-                  10000 Satoshi = 0.00010000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  10000 Satoshi = 0.00010000 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h4}>
                 <p>
-                  100000 Satoshi = 0.00100000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  100000 Satoshi = 0.00100000 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h3}>
                 <p>
-                  1000000 Satoshi = 0.01000000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  1000000 Satoshi = 0.01000000 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h2}>
                 <p>
-                  10000000 Satoshi = 0.10000000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  10000000 Satoshi = 0.10000000 <img src="/images/btc.png" />
                 </p>
               </div>
               <div className={styles.h1}>
                 <p>
-                  100000000 Satoshi = 1.00000000{" "}
-                  <i className="iconfont icon-btc1"></i>
+                  100000000 Satoshi = 1.00000000 <img src="/images/btc.png" />
                 </p>
               </div>
             </div>

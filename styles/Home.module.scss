@@ -6,61 +6,27 @@
   overflow: hidden;
   text-align: center;
   .float_left {
-    padding: 30px 90px 0 50px;
+    width: 540px;
+    // padding: 30px 90px 0 50px;
+    padding-top: 30px;
     text-align: center;
+    overflow: hidden;
     img {
+      margin: o auto;
       width: 400px;
     }
   }
 
   .float_right {
-    padding: 40px 90px 0 0;
+    width: calc(100% - 540px);
+    // padding: 40px 90px 0 0;
+    padding-top: 40px;
+    text-align: center;
     p {
       line-height: 180%;
     }
   }
 
-  // div {
-  // margin: 0;
-  // padding: 0;
-  // background: #fff;
-  // // text-align: right;
-  // p {
-  //   border: 1px solid #333;
-  //   border-bottom: none;
-  //   display: inline-block;
-  //   vertical-align: top;
-  //   padding: 0;
-  //   // margin: 0px auto;
-  //   padding: 5px 30px;
-  //   position: relative;
-  //   overflow: hidden;
-  //   border-radius: 2px 2px 0 0;
-  //   margin-bottom: -15px;
-  //   background: #fff;
-
-  //   &::before {
-  //     content: "";
-  //     position: absolute;
-  //     right: 0;
-  //     top: 1px;
-  //     width: 3px;
-  //     height: 100%;
-  //     background: #ccc;
-  //     transform: skew(0, 45deg);
-  //   }
-  //   &::after {
-  //     content: "";
-  //     position: absolute;
-  //     left: 1px;
-  //     top: 0;
-  //     width: 100%;
-  //     height: 3px;
-  //     background: #ccc;
-  //     transform: skew(45deg, 0);
-  //   }
-  // }
-  // }
   div p i {
     vertical-align: top;
   }
@@ -69,7 +35,6 @@
   }
   .h0 p,
   .h0 p i {
-    // font-family: baidu !important;
     border: none;
     font-size: 32px;
     padding-bottom: 5px;
@@ -81,6 +46,11 @@
       display: none;
     }
   }
+  .h1 p img {
+    height: 32px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
   .h1 p,
   .h1 p i {
     // border-radius: 5px;
@@ -88,45 +58,100 @@
     margin-bottom: 5px;
     opacity: 1;
   }
+  .h1 p img {
+    opacity: 1;
+    height: 30px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
   .h2 p,
   .h2 p i {
     font-size: 28px;
     opacity: 0.95;
+  }
+  .h2 p img {
+    opacity: 0.95;
+    height: 28px;
+    margin-bottom: 4px;
+    vertical-align: middle;
   }
   .h3 p,
   .h3 p i {
     font-size: 26px;
     opacity: 0.9;
   }
+  .h3 p img {
+    opacity: 0.9;
+    height: 26px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
   .h4 p,
   .h4 p i {
     font-size: 24px;
     opacity: 0.85;
+  }
+  .h4 p img {
+    opacity: 0.85;
+    height: 24px;
+    margin-bottom: 4px;
+    vertical-align: middle;
   }
   .h5 p,
   .h5 p i {
     font-size: 22px;
     opacity: 0.8;
   }
+  .h5 p img {
+    opacity: 0.8;
+    height: 22px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
   .h6 p,
   .h6 p i {
     font-size: 20px;
     opacity: 0.75;
+  }
+  .h6 p img {
+    opacity: 0.75;
+    height: 20px;
+    margin-bottom: 4px;
+    vertical-align: middle;
   }
   .h7 p,
   .h7 p i {
     font-size: 18px;
     opacity: 0.7;
   }
+  .h7 p img {
+    opacity: 0.7;
+    height: 18px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
   .h8 p,
   .h8 p i {
     font-size: 16px;
     opacity: 0.65;
   }
+  .h8 p img {
+    opacity: 0.5;
+    height: 16px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
+
   .h9 p,
   .h9 p i {
     font-size: 14px;
     opacity: 0.6;
+  }
+  .h9 p img {
+    opacity: 0.6;
+    height: 14px;
+    margin-bottom: 4px;
+    vertical-align: middle;
   }
   .belief {
     text-align: left;
@@ -156,21 +181,24 @@
   position: relative;
 
   .who_box {
-    width: 505px;
+    width: 495px;
     // padding: 0 !important;
-    height: 765px;
+    height: 710px;
     .who_img {
-      height: calc(100% - 54px);
+      height: calc(100% - 95px);
       display: flex;
       justify-content: center;
       align-items: center;
+      img {
+        height: 100%;
+      }
     }
   }
 
   .tokenomics_content {
     width: calc(100% - 525px);
     .tokenomics_box {
-      height: 477px;
+      // height: 477px;
 
       .echarts_content {
         overflow: hidden;
@@ -197,7 +225,7 @@
                 overflow: hidden;
                 span {
                   display: inline-block;
-                  width: calc(33.333333% - 1px);
+                  width: calc(33.333333% - 20px);
                   font-size: 12px;
                   height: 100%;
                   vertical-align: top;
@@ -224,7 +252,7 @@
       }
     }
     .address_box {
-      height: 268px;
+      // height: 268px;
       .contract_content {
         padding-top: 14px;
         padding-bottom: 14px;
@@ -233,7 +261,7 @@
           padding: 5px 15px;
           list-style: disc;
           li {
-            line-height: 20px;
+            // line-height: 20px;
           }
         }
       }

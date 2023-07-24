@@ -12,13 +12,13 @@ function getLibrary(provider) {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <NextUIProvider>
-      <Provider store={store}>
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <Component {...pageProps} />
-        </Web3ReactProvider>
-      </Provider>
-    </NextUIProvider>
+    // <NextUIProvider>
+    <Provider store={store}>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <Component {...pageProps} />
+      </Web3ReactProvider>
+    </Provider>
+    // </NextUIProvider>
   );
 }
 
