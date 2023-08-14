@@ -1,7 +1,7 @@
 /**
  *
- * @param {} state  仓库数据
- * @param {*} action  通知对象
+ * @param {} state
+ * @param {*} action
  * @returns
  */
 export default function reducer(
@@ -19,7 +19,7 @@ export default function reducer(
      * bsc test 97
      * bsc 56
      */
-    networkPrd: 97,
+    networkPrd: 56,
     isWhiteListUser: false,
     whiteListLoading: false,
     addressStateLoading: false,

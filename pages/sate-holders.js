@@ -26,7 +26,7 @@ import { useWeb3React } from "@web3-react/core";
 
 export default function Holders() {
   let cfg = {
-    AIRDROP_ADDR: "0x41968844968593B080CE5573B7D8739Bb13d2dBf",
+    AIRDROP_ADDR: "0xB31B9CE29F3f6E7C45804937C6141bD6dA369Bdc",
   };
   // init web3
   const { active, account, library, connector, activate, deactivate } =
@@ -65,7 +65,7 @@ export default function Holders() {
 
   let addressList = [];
   const getList = async (page) => {
-    for (let i = 0; i < 43; i++) {
+    for (let i = 0; i < 60; i++) {
       // setTimeout(() => {
       await axios
         .get(
@@ -91,12 +91,6 @@ export default function Holders() {
 
   useEffect(() => {
     // getList();
-
-    // for (let i = 0; i < 40; i++) {
-    //   setTimeout(() => {
-    //     getList(i * 500);
-    //   }, i * 1000);
-    // }
     if (window && window.ethereum) {
       dispatch(setNetwork(window.ethereum.networkVersion));
     }
@@ -304,7 +298,7 @@ export default function Holders() {
                     <li>
                       {!stateData.user.isWhiteListUser
                         ? "You're not on the white list"
-                        : "1200,000,000,000 Sats"}
+                        : "7,383,966,245 Sats"}
                     </li>
                   ) : (
                     <li>
@@ -316,16 +310,70 @@ export default function Holders() {
                     </li>
                   )}
 
-                  {!stateData.user.isWhiteListUser &&
+                  {stateData.user.whiteListLoading ||
+                  stateData.user.addressStateLoading ? (
+                    <li>
+                      <img
+                        src="images/loading.gif"
+                        className="loading-line"
+                      ></img>
+                      Just a moment...
+                    </li>
+                  ) : !stateData.user.isWhiteListUser ? (
+                    <li>You not win</li>
+                  ) : (
+                    <li>
+                      {stateData.user.ercUserInfo ? (
+                        !stateData.user.brcUserCliam &&
+                        stateData.user.ercUserCliam ? (
+                          <span>
+                            Please choose another MetaMask address
+                            <i className="iconfont icon-tixingshixin">
+                              <label className="tips">
+                                Each Metamask address can only claim the airdrop
+                                once. Please click the 'Connect BSC' button in
+                                the top right corner to switch to an address
+                                that has not received the airdrop yet for
+                                claiming.
+                              </label>
+                            </i>
+                          </span>
+                        ) : (
+                          <button
+                            className={`btn ${
+                              userRecords.findIndex(
+                                (user) => user.brc == stateData.user.brcUserInfo
+                              ) != -1
+                                ? "green"
+                                : ""
+                            }`}
+                            onClick={(e) => cliam(stateData.user.ercUserInfo)}
+                          >
+                            {userRecords.findIndex(
+                              (user) => user.brc == stateData.user.brcUserInfo
+                            ) != -1
+                              ? "verify"
+                              : "Claim"}
+                          </button>
+                        )
+                      ) : (
+                        <button
+                          className="btn"
+                          onClick={(e) => getNetWork(e, "MetaMask")}
+                        >
+                          Connect BSC
+                        </button>
+                      )}
+                    </li>
+                  )}
+
+                  {/* {!stateData.user.isWhiteListUser &&
                   !stateData.user.whiteListLoading &&
                   !stateData.user.addressStateLoading ? (
                     <li>You not win</li>
-                  ) : (
-                    ""
-                  )}
-                  {stateData.user.isWhiteListUser &&
-                  !stateData.user.whiteListLoading &&
-                  !stateData.user.addressStateLoading ? (
+                  ) : stateData.user.isWhiteListUser &&
+                    !stateData.user.whiteListLoading &&
+                    !stateData.user.addressStateLoading ? (
                     <li>
                       {stateData.user.ercUserInfo ? (
                         !stateData.user.brcUserCliam ? (
@@ -376,7 +424,7 @@ export default function Holders() {
                       ></img>
                       Just a moment...
                     </li>
-                  )}
+                  )} */}
                 </ul>
               </div>
             </div>
@@ -405,7 +453,7 @@ export default function Holders() {
                       item.length - 10,
                       item.length
                     )}`}</li>
-                    <li>1200,000,000,000 Sats</li>
+                    <li>7,383,966,245 Sats</li>
                     <li>
                       {userRecords.findIndex((user) => user.brc == item) !=
                       -1 ? (

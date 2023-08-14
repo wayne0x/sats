@@ -30,28 +30,13 @@ import whiteList from "../../api/whiteList.json";
 
 function header(props) {
   let cfg = {
-    AIRDROP_ADDR: "0x41968844968593B080CE5573B7D8739Bb13d2dBf",
+    AIRDROP_ADDR: "0xB31B9CE29F3f6E7C45804937C6141bD6dA369Bdc",
   };
   // init web3
   const { active, account, library, connector, activate, deactivate } =
     useWeb3React();
   const web3 = new Web3(Web3.givenProvider);
   const airdropContract = new web3.eth.Contract(Airdrop_ABI, cfg.AIRDROP_ADDR);
-  // let addresss = [];
-  // holders.data.detail.forEach((holder) => {
-  //   addresss.push(holder.address);
-  // });
-  // addresss.push(
-  //   "bc1pp436snntu77e09wvdnwqs2jed44k4rq67u4l3wwrt7e6c7uq7pxqg2evxh"
-  // );
-  // addresss = addresss.filter((item, index, array) => {
-  //   return array.indexOf(item) === index;
-  // });
-  // let [whitelist, setwhitelist] = useState(addresss);
-  // const keccak256 = require("keccak256");
-  // const leafNodes = whitelist.map((addr) => keccak256(addr));
-  // const { MerkleTree } = require("merkletreejs");
-  // const merkletree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
 
   let [walletListToggle, setWalletListToggle] = useState(false);
   let [routePath, setRoutePath] = useState("/");
@@ -62,86 +47,86 @@ function header(props) {
   });
   // changeRedux
   const dispatch = useDispatch();
+
+  const init = () => {
+    // console.log(window.ethereum.networkVersion);
+    // console.log(store.getState().user.networkPrd);
+    if (store.getState().user.networkPrd == window.ethereum.networkVersion) {
+      dispatch(setNetwork(window.ethereum.networkVersion));
+      // Get Brc20 Accounts
+      if (
+        typeof window.unisat !== "undefined" &&
+        !JSON.parse(localStorage.getItem("brcDisconnect"))
+      ) {
+        window.unisat.getAccounts().then((accounts) => {
+          if (accounts[0]) {
+            updatBrcUserInfo(accounts[0]);
+            // Get Erc20 Accounts
+            if (
+              window &&
+              window.ethereum &&
+              window.ethereum.selectedAddress &&
+              !store.getState().user.ercUserInfo &&
+              !JSON.parse(localStorage.getItem("ercDisconnect"))
+            ) {
+              updatErcUserInfo(window.ethereum.selectedAddress);
+            }
+            localStorage.setItem("brcDisconnect", false);
+            localStorage.setItem("ercDisconnect", false);
+          }
+        });
+        // changeAccount
+        unisat.on("accountsChanged", (accounts) => {
+          if (accounts.length == 0) {
+            dispatch(setBrcUserInfo(null));
+            localStorage.setItem("brcDisconnect", false);
+            localStorage.setItem("ercDisconnect", false);
+          } else {
+            updatBrcUserInfo(accounts[0]);
+            localStorage.setItem("brcDisconnect", false);
+            localStorage.setItem("ercDisconnect", false);
+          }
+        });
+      }
+      // Get Erc20 Accounts
+      // changeAccount
+      if (
+        window &&
+        window.ethereum &&
+        !JSON.parse(localStorage.getItem("ercDisconnect"))
+      ) {
+        window.ethereum.on("accountsChanged", (accounts) => {
+          if (accounts.length == 0) {
+            dispatch(setErcUserInfo(null));
+            localStorage.setItem("ercDisconnect", false);
+          } else {
+            updatBrcUserInfo(store.getState().user.brcUserInfo);
+            updatErcUserInfo(accounts[0]);
+            localStorage.setItem("ercDisconnect", false);
+          }
+        });
+      }
+    } else {
+      dispatch(setBrcUserInfo(null));
+      localStorage.setItem("brcDisconnect", true);
+      dispatch(setErcUserInfo(null));
+      localStorage.setItem("ercDisconnect", true);
+      changeNetwork(store.getState().user.networkPrd);
+      dispatch(setNetwork(0));
+    }
+  };
+
   // watch route
   useEffect(() => {
     setRoutePath(Router.route);
-    // Get Brc20 Accounts
-    if (
-      typeof window.unisat !== "undefined" &&
-      !JSON.parse(localStorage.getItem("brcDisconnect"))
-    ) {
-      window.unisat.getAccounts().then((accounts) => {
-        if (accounts[0]) {
-          updatBrcUserInfo(accounts[0]);
-          // Get Erc20 Accounts
-          if (
-            window &&
-            window.ethereum &&
-            window.ethereum.selectedAddress &&
-            !store.getState().user.ercUserInfo &&
-            !JSON.parse(localStorage.getItem("ercDisconnect"))
-          ) {
-            updatErcUserInfo(window.ethereum.selectedAddress);
-          }
-          localStorage.setItem("brcDisconnect", false);
-          localStorage.setItem("ercDisconnect", false);
-        }
-      });
-      // changeAccount
-      unisat.on("accountsChanged", (accounts) => {
-        if (accounts.length == 0) {
-          dispatch(setBrcUserInfo(null));
-          localStorage.setItem("brcDisconnect", false);
-          localStorage.setItem("ercDisconnect", false);
-        } else {
-          updatBrcUserInfo(accounts[0]);
-          localStorage.setItem("brcDisconnect", false);
-          localStorage.setItem("ercDisconnect", false);
-        }
-      });
-      // // get NetWork
-      // window.unisat.getNetwork().then((network) => {
-      //   console.log(network);
-      // });
-    }
 
-    // // Get Erc20 Accounts
-    // if (
-    //   window &&
-    //   window.ethereum &&
-    //   window.ethereum.selectedAddress &&
-    //   !store.getState().user.ercUserInfo &&
-    //   !JSON.parse(localStorage.getItem("ercDisconnect"))
-    // ) {
-    //   updatErcUserInfo(window.ethereum.selectedAddress);
-    // }
-    // changeAccount
-    if (
-      window &&
-      window.ethereum &&
-      !JSON.parse(localStorage.getItem("ercDisconnect"))
-    ) {
-      window.ethereum.on("accountsChanged", (accounts) => {
-        if (accounts.length == 0) {
-          dispatch(setErcUserInfo(null));
-          localStorage.setItem("ercDisconnect", false);
-        } else {
-          updatBrcUserInfo(store.getState().user.brcUserInfo);
-          updatErcUserInfo(accounts[0]);
-          localStorage.setItem("ercDisconnect", false);
-        }
+    if (window && window.ethereum) {
+      init();
+
+      window.ethereum.on("networkChanged", (network) => {
+        init();
       });
     }
-    if (window && window.ethereum) {
-      dispatch(setNetwork(window.ethereum.networkVersion));
-    }
-    // window.ethereum.on("networkChanged", (network) => {
-    //   if (network != store.getState().user.networkPrd) {
-    //     dispatch(setErcUserInfo(null));
-    //     localStorage.setItem("ercDisconnect", false);
-    //   }
-    // });
-    // getIsWhiteListUser();
   }, [Router.events]);
 
   // getIsWhiteListUser
@@ -191,23 +176,21 @@ function header(props) {
     );
   };
 
-  const editProfile = async () => {
-    await getUserInfo();
-    await profileShow(true);
-  };
-
   // brc20 Connect
   function brcConnect() {
     if (typeof window.unisat !== "undefined") {
-      window.unisat.requestAccounts().then((accounts) => {
-        if (accounts[0]) {
-          Router.push("/sate-holders");
-          // Router.push("sate-holders", undefined, { shallow: true });
-          updatBrcUserInfo(accounts[0]);
-          localStorage.setItem("brcDisconnect", false);
-          localStorage.setItem("ercDisconnect", false);
-        }
-      });
+      // window.unisat.requestAccounts().then((accounts) => {
+      //   if (accounts[0]) {
+      //     Router.push("/sate-holders");
+      //     // Router.push("sate-holders", undefined, { shallow: true });
+      //     updatBrcUserInfo(accounts[0]);
+      //     localStorage.setItem("brcDisconnect", false);
+      //     localStorage.setItem("ercDisconnect", false);
+      //   }
+      // });
+      localStorage.setItem("brcDisconnect", false);
+      // localStorage.setItem("ercDisconnect", false);
+      init();
     } else {
       alert("UniSat Wallet has not been installed!");
     }
@@ -234,16 +217,6 @@ function header(props) {
       );
       return;
     }
-    // localStorage.setItem("ercDisconnect", false);
-    // if (
-    //   window &&
-    //   window.ethereum &&
-    //   window.ethereum.selectedAddress &&
-    //   !store.getState().user.ercUserInfo &&
-    //   !JSON.parse(localStorage.getItem("ercDisconnect"))
-    // ) {
-    //   updatErcUserInfo(window.ethereum.selectedAddress);
-    // } else {
     if (window.ethereum) {
       web3.eth.net.getId().then((res) => {
         if (res == store.getState().user.networkPrd) {
@@ -261,7 +234,6 @@ function header(props) {
         })
       );
     }
-    // }
   };
   // changeNetwork
   const changeNetwork = (networkId, e, type) => {
@@ -275,7 +247,9 @@ function header(props) {
         ],
       })
       .then((res) => {
-        getNetWork(e, type);
+        if (e && type) {
+          getNetWork(e, type);
+        }
       })
       .catch((error) => {});
   };
@@ -333,6 +307,7 @@ function header(props) {
   }
 
   async function updatBrcUserInfo(address) {
+    if (!address) return;
     if (store.getState().user.network == store.getState().user.networkPrd) {
       // console.log("updatBrcUserInfo");
       dispatch(setAddressStateLoading(true));
@@ -341,7 +316,7 @@ function header(props) {
         .hasBrcGet(address)
         .call()
         .then((v) => {
-          console.log("hasBrcGet:", v);
+          console.log(v);
           dispatch(setAddressStateLoading(false));
           dispatch(setBrcUserCliam(v));
         });
@@ -349,6 +324,7 @@ function header(props) {
     dispatch(setBrcUserInfo(address));
   }
   async function updatErcUserInfo(address) {
+    if (!address) return;
     // console.log(store.getState().user.network);
     // console.log(store.getState().user.networkPrd);
     if (store.getState().user.network == store.getState().user.networkPrd) {
@@ -358,7 +334,7 @@ function header(props) {
         .hasErcGet(address)
         .call()
         .then((v) => {
-          console.log("hasErcGet:", v);
+          console.log(v);
           dispatch(setAddressStateLoading(false));
           dispatch(setErcUserCliam(v));
         });
@@ -377,58 +353,60 @@ function header(props) {
             <button className="btn icon_btn">
               <img src="/images/twitter.png" />
             </button>
-            {stateData.user.brcUserInfo ? (
-              <button
-                className="btn green disconnect"
-                onClick={(e) => disconnect("brc")}
-              >
-                <i className="iconfont icon-btc"></i>
-                <i className="iconfont icon-duankai"></i>
-                {`${stateData.user.brcUserInfo.slice(
-                  0,
-                  4
-                )}....${stateData.user.brcUserInfo.slice(
-                  stateData.user.brcUserInfo.length - 4,
-                  stateData.user.brcUserInfo.length
-                )}`}
+            {store.getState().user.networkPrd !=
+            store.getState().user.network ? (
+              <button className="btn" onClick={(e) => init()}>
+                Change Network
               </button>
             ) : (
-              // onClick={walletListShow}
-              <button className="btn" onClick={brcConnect}>
-                Connect BRC
-              </button>
+              <div style={{ float: "right" }}>
+                {stateData.user.brcUserInfo ? (
+                  <button
+                    className="btn green disconnect"
+                    onClick={(e) => disconnect("brc")}
+                  >
+                    <i className="iconfont icon-btc"></i>
+                    <i className="iconfont icon-duankai"></i>
+                    {`${stateData.user.brcUserInfo.slice(
+                      0,
+                      4
+                    )}....${stateData.user.brcUserInfo.slice(
+                      stateData.user.brcUserInfo.length - 4,
+                      stateData.user.brcUserInfo.length
+                    )}`}
+                  </button>
+                ) : (
+                  // onClick={walletListShow}
+                  <button className="btn" onClick={brcConnect}>
+                    Connect BRC
+                  </button>
+                )}
+                {stateData.user.ercUserInfo ? (
+                  <button
+                    className="btn green disconnect"
+                    onClick={(e) => disconnect("erc")}
+                  >
+                    <i className="iconfont icon-ETH1"></i>
+                    <i className="iconfont icon-duankai"></i>
+                    {`${stateData.user.ercUserInfo.slice(
+                      0,
+                      4
+                    )}....${stateData.user.ercUserInfo.slice(
+                      stateData.user.ercUserInfo.length - 4,
+                      stateData.user.ercUserInfo.length
+                    )}`}
+                  </button>
+                ) : (
+                  // onClick={walletListShow}
+                  <button
+                    className="btn"
+                    onClick={(e) => getNetWork(e, "MetaMask")}
+                  >
+                    Connect BSC
+                  </button>
+                )}
+              </div>
             )}
-            {/* {(stateData.user.brcUserInfo && isWhiteListUser) ||
-            (!stateData.user.brcUserInfo && !stateData.user.ercUserInfo) ? (
-              <div> */}
-            {stateData.user.ercUserInfo ? (
-              <button
-                className="btn green disconnect"
-                onClick={(e) => disconnect("erc")}
-              >
-                <i className="iconfont icon-ETH1"></i>
-                <i className="iconfont icon-duankai"></i>
-                {`${stateData.user.ercUserInfo.slice(
-                  0,
-                  4
-                )}....${stateData.user.ercUserInfo.slice(
-                  stateData.user.ercUserInfo.length - 4,
-                  stateData.user.ercUserInfo.length
-                )}`}
-              </button>
-            ) : (
-              // onClick={walletListShow}
-              <button
-                className="btn"
-                onClick={(e) => getNetWork(e, "MetaMask")}
-              >
-                Connect BSC
-              </button>
-            )}
-            {/* </div> */}
-            {/* ) : (
-              ""
-            )} */}
           </div>
           <div className={styles.nav}>
             <ul>

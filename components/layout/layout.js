@@ -9,7 +9,7 @@ import "animate.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { changeUserAC } from "../../redux/actions/index";
 
-export const siteTitle = "test next";
+export const siteTitle = "stas";
 
 export default function Layout({ children, home }) {
   const stateData = useSelector((state) => {
