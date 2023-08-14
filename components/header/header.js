@@ -122,7 +122,6 @@ function header(props) {
 
     if (window && window.ethereum) {
       init();
-
       window.ethereum.on("networkChanged", (network) => {
         init();
       });
@@ -179,18 +178,18 @@ function header(props) {
   // brc20 Connect
   function brcConnect() {
     if (typeof window.unisat !== "undefined") {
-      // window.unisat.requestAccounts().then((accounts) => {
-      //   if (accounts[0]) {
-      //     Router.push("/sate-holders");
-      //     // Router.push("sate-holders", undefined, { shallow: true });
-      //     updatBrcUserInfo(accounts[0]);
-      //     localStorage.setItem("brcDisconnect", false);
-      //     localStorage.setItem("ercDisconnect", false);
-      //   }
-      // });
-      localStorage.setItem("brcDisconnect", false);
+      window.unisat.requestAccounts().then((accounts) => {
+        if (accounts[0]) {
+          Router.push("/sate-holders");
+          // Router.push("sate-holders", undefined, { shallow: true });
+          updatBrcUserInfo(accounts[0]);
+          localStorage.setItem("brcDisconnect", false);
+          localStorage.setItem("ercDisconnect", false);
+        }
+      });
+      // localStorage.setItem("brcDisconnect", false);
       // localStorage.setItem("ercDisconnect", false);
-      init();
+      // init();
     } else {
       alert("UniSat Wallet has not been installed!");
     }
@@ -237,6 +236,12 @@ function header(props) {
   };
   // changeNetwork
   const changeNetwork = (networkId, e, type) => {
+    dispatch(
+      changeLoading({
+        state: true,
+        msg: "Please switch your network...",
+      })
+    );
     window.ethereum
       .request({
         method: "wallet_switchEthereumChain",
@@ -247,11 +252,14 @@ function header(props) {
         ],
       })
       .then((res) => {
+        dispatch(changeLoading(null));
         if (e && type) {
           getNetWork(e, type);
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        dispatch(changeLoading(null));
+      });
   };
 
   // connect Meta Mask
